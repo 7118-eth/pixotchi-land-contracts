@@ -17,12 +17,16 @@ library LibWareHouse {
         LibLand._decreaseAccumulatedPlantPoints(_landId, _addedPoints);
 
         _newPlantPoints = landToPlant.landToPlantAssignPlantPoints(_plantId, _addedPoints);
+
+        return _newPlantPoints;
     }
 
     function landToPlantAssignLifeTime(uint256 _landId, uint256 _plantId, uint256 _lifetime) internal returns (uint256 _newLifetime){
         LibLand._decreaseAccumulatedPlantLifetime(_landId, _lifetime);
 
         _newLifetime = landToPlant.landToPlantAssignLifeTime(_plantId, _lifetime);
+
+        return _newLifetime;
     }
 
 
