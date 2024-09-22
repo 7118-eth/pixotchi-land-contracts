@@ -280,32 +280,40 @@ library LibLand {
 
     }
 
-    /// @notice Retrieves and resets the accumulated plant points for a land
-    /// @param tokenId The ID of the token to pop accumulated plant points from
-    /// @return points The original accumulated plant points before resetting
-    function _popAccumulatedPlantPoints(uint256 tokenId) internal returns (uint256 points) {
+    /// @notice Decreases the accumulated plant points for a land
+    /// @param tokenId The ID of the token to decrease accumulated plant points from
+    /// @param pointsToDecrease The amount of points to decrease
+    /// @return points The amount of points decreased
+    function _decreaseAccumulatedPlantPoints(uint256 tokenId, uint256 pointsToDecrease) internal returns (uint256 points) {
         // Checks
-        require(IERC721(address(this)).exists(tokenId), "LibLand: Token does not exist");
+        require(LibERC721._exists(tokenId), "LibLand: Token does not exist");
+        require(pointsToDecrease > 0, "LibLand: Points to decrease must be greater than zero");
+
+        LibLandStorage.Data storage s = _sN();
+        require(s.accumulatedPlantPoints[tokenId] >= pointsToDecrease, "LibLand: Insufficient accumulated points");
 
         // Effects
-        LibLandStorage.Data storage s = _sN();
-        points = s.accumulatedPlantPoints[tokenId];
-        s.accumulatedPlantPoints[tokenId] = 0;
+        s.accumulatedPlantPoints[tokenId] -= pointsToDecrease;
+        points = pointsToDecrease;
 
         return points;
     }
 
-    /// @notice Retrieves and resets the accumulated plant lifetime for a land
-    /// @param tokenId The ID of the token to pop accumulated plant lifetime from
-    /// @return lifetime The original accumulated plant lifetime before resetting
-    function _popAccumulatedPlantLifetime(uint256 tokenId) internal returns (uint256 lifetime) {
+    /// @notice Decreases the accumulated plant lifetime for a land
+    /// @param tokenId The ID of the token to decrease accumulated plant lifetime from
+    /// @param lifetimeToDecrease The amount of lifetime to decrease
+    /// @return lifetime The amount of lifetime decreased
+    function _decreaseAccumulatedPlantLifetime(uint256 tokenId, uint256 lifetimeToDecrease) internal returns (uint256 lifetime) {
         // Checks
-        require(IERC721(address(this)).exists(tokenId), "LibLand: Token does not exist");
+        require(LibERC721._exists(tokenId), "LibLand: Token does not exist");
+        require(lifetimeToDecrease > 0, "LibLand: Lifetime to decrease must be greater than zero");
+
+        LibLandStorage.Data storage s = _sN();
+        require(s.accumulatedPlantLifetime[tokenId] >= lifetimeToDecrease, "LibLand: Insufficient accumulated lifetime");
 
         // Effects
-        LibLandStorage.Data storage s = _sN();
-        lifetime = s.accumulatedPlantLifetime[tokenId];
-        s.accumulatedPlantLifetime[tokenId] = 0;
+        s.accumulatedPlantLifetime[tokenId] -= lifetimeToDecrease;
+        lifetime = lifetimeToDecrease;
 
         return lifetime;
     }
