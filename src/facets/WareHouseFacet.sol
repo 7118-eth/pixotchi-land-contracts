@@ -6,28 +6,32 @@ import "../shared/Structs.sol";
 import { AccessControl2 } from "../libs/libAccessControl2.sol";
 
 /// @title WareHouseFacet
-/// @notice This contract manages warehouse operations for plant points and lifetime assignments
+/// @notice Manages warehouse operations for plant points and lifetime assignments
 /// @dev Inherits from AccessControl2 for access control functionality
 contract WareHouseFacet is AccessControl2 {
-  /// @notice Assigns plant points to a specific NFT
-  /// @param _nftId The ID of the NFT to assign points to
+  /// @notice Assigns plant points to a specific plant on a land
+  /// @param _landId The ID of the land where the plant is located
+  /// @param _plantId The ID of the plant to assign points to
   /// @param _addedPoints The number of points to add
-  /// @return _newPlantPoints The updated total plant points for the NFT
+  /// @return _newPlantPoints The updated total plant points for the plant
   function wareHouseAssignPlantPoints(
-    uint256 _nftId,
+    uint256 _landId,
+    uint256 _plantId,
     uint256 _addedPoints
-  ) external isApproved(_nftId) returns (uint256 _newPlantPoints) {
-    return LibWareHouse.landToPlantAssignPlantPoints(_nftId, _addedPoints);
+  ) external isApproved(_landId) returns (uint256 _newPlantPoints) {
+    return LibWareHouse.landToPlantAssignPlantPoints(_landId, _plantId, _addedPoints);
   }
 
-  /// @notice Assigns lifetime to a specific NFT
-  /// @param _nftId The ID of the NFT to assign lifetime to
+  /// @notice Assigns lifetime to a specific plant on a land
+  /// @param _landId The ID of the land where the plant is located
+  /// @param _plantId The ID of the plant to assign lifetime to
   /// @param _lifetime The lifetime value to assign
-  /// @return _newLifetime The updated lifetime for the NFT
+  /// @return _newLifetime The updated lifetime for the plant
   function wareHouseAssignLifeTime(
-    uint256 _nftId,
+    uint256 _landId,
+    uint256 _plantId,
     uint256 _lifetime
-  ) external isApproved(_nftId) returns (uint256 _newLifetime) {
-    return LibWareHouse.landToPlantAssignLifeTime(_nftId, _lifetime);
+  ) external isApproved(_landId) returns (uint256 _newLifetime) {
+    return LibWareHouse.landToPlantAssignLifeTime(_landId, _plantId, _lifetime);
   }
 }

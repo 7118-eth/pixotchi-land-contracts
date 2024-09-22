@@ -1359,7 +1359,12 @@ export const abi = [
     "name": "wareHouseAssignLifeTime",
     "inputs": [
       {
-        "name": "_nftId",
+        "name": "_landId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_plantId",
         "type": "uint256",
         "internalType": "uint256"
       },
@@ -1383,7 +1388,12 @@ export const abi = [
     "name": "wareHouseAssignPlantPoints",
     "inputs": [
       {
-        "name": "_nftId",
+        "name": "_landId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_plantId",
         "type": "uint256",
         "internalType": "uint256"
       },
@@ -2057,6 +2067,68 @@ export const abi = [
       },
       {
         "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "WareHouseLifetimeAssigned",
+    "inputs": [
+      {
+        "name": "landId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "plantId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "lifetime",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "newLifetime",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "WareHousePlantPointsAssigned",
+    "inputs": [
+      {
+        "name": "landId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "plantId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "addedPoints",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "newPlantPoints",
         "type": "uint256",
         "indexed": false,
         "internalType": "uint256"
