@@ -106,6 +106,12 @@ module.exports = {
         index: 0,
       },
     },
+    wallet3: {
+      type: "private-key",
+      config: {
+        key: process.env.PRIVATE_KEY_3,
+      },
+    },
   },
   // Networks to deploy to
   networks: {
@@ -136,7 +142,8 @@ module.exports = {
       // Network to deploy to
       network: "sepolia",
       // Wallet to use for deployment
-      wallet: "wallet2",
+      //wallet: "wallet2",
+      wallet: "wallet3",
       // Initialization function arguments
       initArgs: [],
       // CREATE3 salt
