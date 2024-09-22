@@ -1355,6 +1355,54 @@ export const abi = [
     "stateMutability": "nonpayable"
   },
   {
+    "type": "function",
+    "name": "wareHouseAssignLifeTime",
+    "inputs": [
+      {
+        "name": "_nftId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_lifetime",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "_newLifetime",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "wareHouseAssignPlantPoints",
+    "inputs": [
+      {
+        "name": "_nftId",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_addedPoints",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "_newPlantPoints",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
     "type": "event",
     "name": "log",
     "inputs": [
