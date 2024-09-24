@@ -11,6 +11,7 @@ import {  LibMintControl } from "../libs/libMintControl.sol";
 
 contract LandFacet is AccessControl2/*, NFTModifiers*/ {
 
+    event LandNameChanged(uint256 indexed tokenId, string name);
 
     function landGetMintPrice() public view returns (uint256) {
         uint256 _mintPrice = LibMintControl.getMintPrice();
@@ -83,6 +84,8 @@ contract LandFacet is AccessControl2/*, NFTModifiers*/ {
         require(bytes(name).length <= 10, "Name must be at most 10 characters");
         LibLandStorage.Data storage s = _sN();
         s.name[tokenId] = name;
+
+        emit LandNameChanged(tokenId, name);
     }
 
     /// @notice Get an overview of lands owned by a specific address
