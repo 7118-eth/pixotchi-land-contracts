@@ -76,16 +76,21 @@ contract TownFacet is AccessControl2 {
     //write fn: swapSeedToLeaf(uint256 amount)
     //write fn: swapLeafToSeed(uint256 amount)
 
+    event TownUpgradedWithLeaf(uint256 indexed landId, uint8 indexed buildingId, uint256 upgradeCost, uint256 xp);
+    event TownSpeedUpWithSeed(uint256 indexed landId, uint8 indexed buildingId, uint256 speedUpCost, uint256 xp);
+
     function townUpgradeWithLeaf(uint256 landId, uint8 buildingId) public isApproved(landId) {
         (uint256 upgradeCost, uint256 xp) = LibTown._upgradeWithLeaf(landId, buildingId);
         LibXP.pushExperiencePoints(landId, xp);
         LibPayment.paymentPayWithLeaf(msg.sender, upgradeCost);
+        emit TownUpgradedWithLeaf(landId, buildingId, upgradeCost, xp);
     }
 
     function townSpeedUpWithSeed(uint256 landId, uint8 buildingId) public isApproved(landId) {
         (uint256 speedUpCost, uint256 xp) = LibTown._speedUpWithSeed(landId, buildingId);
         LibXP.pushExperiencePoints(landId, xp);
         LibPayment.paymentPayWithSeed(msg.sender, speedUpCost);
+        emit TownSpeedUpWithSeed(landId, buildingId, speedUpCost, xp);
     }
     
 //    function claimTownProduction(uint256 landId, uint8 buildingId) public exists(landId) {
