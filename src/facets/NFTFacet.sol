@@ -16,6 +16,9 @@ contract NFTFacet is
   INFTFacet,
   AccessControl2, MintControl /*is ERC721Upgradeable, ERC721QueryableUpgradeable*/
 {
+
+  event LandMinted(address indexed to, uint256 tokenId, uint256 mintPrice);
+
   function initNFTFacet() external initializer {
     __ERC721_init("Land02", "LAND02");
     _mint(msg.sender, _sN().nextTokenId++);
@@ -40,6 +43,8 @@ contract NFTFacet is
     LibPayment.paymentPayWithSeed(msg.sender, _mintPrice);
 
     _safeMint(to, _tokenId);
+
+    emit LandMinted(to, _tokenId, _mintPrice);
   }
 
   function _sN() internal pure returns (LibLandStorage.Data storage data) {
