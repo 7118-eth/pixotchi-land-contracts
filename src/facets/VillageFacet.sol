@@ -13,6 +13,38 @@ import {AccessControl2} from "../libs/libAccessControl2.sol";
 
 contract VillageFacet is AccessControl2 {
 
+    /// @notice Emitted when a village building is upgraded using leaves
+    /// @param landId The ID of the land
+    /// @param buildingId The ID of the building being upgraded
+    /// @param upgradeCost The cost incurred for the upgrade
+    /// @param xp The experience points awarded for the upgrade
+    event VillageUpgradedWithLeaf(
+        uint256 indexed landId,
+        uint8 indexed buildingId,
+        uint256 upgradeCost,
+        uint256 xp
+    );
+
+    /// @notice Emitted when a village building upgrade is sped up using seeds
+    /// @param landId The ID of the land
+    /// @param buildingId The ID of the building being sped up
+    /// @param speedUpCost The cost incurred to speed up the upgrade
+    /// @param xp The experience points awarded for speeding up the upgrade
+    event VillageSpeedUpWithSeed(
+        uint256 indexed landId,
+        uint8 indexed buildingId,
+        uint256 speedUpCost,
+        uint256 xp
+    );
+
+    /// @notice Emitted when production from a village building is claimed
+    /// @param landId The ID of the land
+    /// @param buildingId The ID of the building from which production is claimed
+    event VillageProductionClaimed(
+        uint256 indexed landId,
+        uint8 indexed buildingId
+    );
+
     /// @notice Internal function to access NFT storage
     /// @return data The LibLandStorage.Data struct
     function _sN() internal pure returns (LibLandStorage.Data storage data) {
