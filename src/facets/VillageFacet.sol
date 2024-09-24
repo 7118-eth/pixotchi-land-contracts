@@ -13,7 +13,6 @@ import {AccessControl2} from "../libs/libAccessControl2.sol";
 
 contract VillageFacet is AccessControl2 {
 
-
     /// @notice Internal function to access NFT storage
     /// @return data The LibLandStorage.Data struct
     function _sN() internal pure returns (LibLandStorage.Data storage data) {
@@ -25,10 +24,6 @@ contract VillageFacet is AccessControl2 {
     function _sA() internal pure returns (AppStorage storage data) {
         data = LibAppStorage.diamondStorage();
     }
-
-
-
-
 
     /// @notice Get all village buildings for a given land ID
     /// @param landId The ID of the land
@@ -44,6 +39,7 @@ contract VillageFacet is AccessControl2 {
         (uint256 upgradeCost, uint256 xp) = LibVillage._villageUpgradeWithLeaf(landId, buildingId);
         LibXP.pushExperiencePoints(landId, xp);
         LibPayment.paymentPayWithLeaf(msg.sender, upgradeCost);
+        emit VillageUpgradedWithLeaf(landId, buildingId, upgradeCost, xp);
     }
 
     /// @notice Speed up a village building upgrade using seeds
@@ -53,6 +49,7 @@ contract VillageFacet is AccessControl2 {
         (uint256 speedUpCost, uint256 xp) = LibVillage._villageSpeedUpWithSeed(landId, buildingId);
         LibXP.pushExperiencePoints(landId, xp);
         LibPayment.paymentPayWithSeed(msg.sender, speedUpCost);
+        emit VillageSpeedUpWithSeed(landId, buildingId, speedUpCost, xp);
     }
 
     /// @notice Claim production from a village building
@@ -61,6 +58,7 @@ contract VillageFacet is AccessControl2 {
     function villageClaimProduction(uint256 landId, uint8 buildingId) public isApproved(landId) {
         LibVillage._villageClaimProduction(landId, buildingId);
         LibXP.pushExperiencePointsVillageClaimProduction(landId, buildingId);
+        emit VillageProductionClaimed(landId, buildingId);
     }
 
 //    function townUpgradeWithLeaf(uint256 landId, uint8 buildingId) public exists(landId) {
