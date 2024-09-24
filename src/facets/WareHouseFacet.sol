@@ -9,6 +9,9 @@ import { AccessControl2 } from "../libs/libAccessControl2.sol";
 /// @notice Manages warehouse operations for plant points and lifetime assignments
 /// @dev Inherits from AccessControl2 for access control functionality
 contract WareHouseFacet is AccessControl2 {
+  event PlantPointsAssigned(uint256 indexed landId, uint256 indexed plantId, uint256 addedPoints, uint256 newPlantPoints);
+  event PlantLifetimeAssigned(uint256 indexed landId, uint256 indexed plantId, uint256 lifetime, uint256 newLifetime);
+
   /// @notice Assigns plant points to a specific plant on a land
   /// @param _landId The ID of the land where the plant is located
   /// @param _plantId The ID of the plant to assign points to
@@ -19,7 +22,8 @@ contract WareHouseFacet is AccessControl2 {
     uint256 _plantId,
     uint256 _addedPoints
   ) external isApproved(_landId) returns (uint256 _newPlantPoints) {
-    return LibWareHouse.landToPlantAssignPlantPoints(_landId, _plantId, _addedPoints);
+    _newPlantPoints = LibWareHouse.landToPlantAssignPlantPoints(_landId, _plantId, _addedPoints);
+    emit PlantPointsAssigned(_landId, _plantId, _addedPoints, _newPlantPoints);
   }
 
   /// @notice Assigns lifetime to a specific plant on a land
@@ -32,6 +36,7 @@ contract WareHouseFacet is AccessControl2 {
     uint256 _plantId,
     uint256 _lifetime
   ) external isApproved(_landId) returns (uint256 _newLifetime) {
-    return LibWareHouse.landToPlantAssignLifeTime(_landId, _plantId, _lifetime);
+    _newLifetime = LibWareHouse.landToPlantAssignLifeTime(_landId, _plantId, _lifetime);
+    emit PlantLifetimeAssigned(_landId, _plantId, _lifetime, _newLifetime);
   }
 }
