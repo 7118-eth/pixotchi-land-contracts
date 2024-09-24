@@ -15,16 +15,22 @@ import {AccessControl2} from "../libs/libAccessControl2.sol";
 
 contract QuestFacet is AccessControl2 {
 
+    event QuestStarted(uint256 indexed landId, QuestDifficultyLevel difficultyLevel, uint256 farmerSlotId);
+    event QuestCommitted(uint256 indexed landId, uint256 farmerSlotId);
+    event QuestFinalized(uint256 indexed landId, uint256 farmerSlotId, bool success, RewardType rewardType, uint256 rewardAmount);
+
     function questGetByLandId(uint256 landId) public view isMinted(landId) returns (Quest[] memory quests) {
         return LibQuest.getQuests(landId);
     }
 
     function questStart(uint256 landId, QuestDifficultyLevel difficultyLevel, uint256 farmerSlotId) public isApproved(landId) {
         LibQuest.startQuest(landId, difficultyLevel, farmerSlotId);
+        emit QuestStarted(landId, difficultyLevel, farmerSlotId);
     }
 
     function questCommit(uint256 landId, uint256 farmerSlotId) public isApproved(landId) {
         LibQuest.commitQuest(landId, farmerSlotId);
+        emit QuestCommitted(landId, farmerSlotId);
     }
 
     function questFinalize(uint256 landId, uint256 farmerSlotId) public isApproved(landId)
@@ -49,6 +55,7 @@ contract QuestFacet is AccessControl2 {
             }
         }
 
+        emit QuestFinalized(landId, farmerSlotId, success, rewardType, rewardAmount);
         return (success, rewardType, rewardAmount);
     }
 
