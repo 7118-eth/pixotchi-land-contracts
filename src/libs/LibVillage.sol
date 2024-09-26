@@ -242,7 +242,7 @@ library LibVillage {
     /// @param productionRatePlantPointsPerDay The daily production rate of plant points for the building
     /// @return The accumulated plant points, scaled by PLANT_POINT_DECIMALS (1e12)
     function _calculateAccumulatedPoints(uint256 blocksPassed, uint256 productionRatePlantPointsPerDay) private pure returns (uint256) {
-        return (blocksPassed * LibConstants.BLOCK_TIME * productionRatePlantPointsPerDay * LibConstants.PLANT_POINT_DECIMALS) / 1 days;
+        return (blocksPassed * LibConstants.BLOCK_TIME * productionRatePlantPointsPerDay * LibConstants.PLANT_POINT_DECIMALS) / (1 days * 10);
     }
 
     /// @notice Calculates the accumulated plant lifetime for a village building
@@ -283,7 +283,7 @@ library LibVillage {
         // (blocksPassed * BLOCK_TIME) converts blocks to seconds
         // (... * productionRatePlantLifetimePerDay) calculates total lifetime for the time period
         // Finally, divide by (1 days) to get the fraction of daily production
-        return (blocksPassed * LibConstants.BLOCK_TIME * productionRatePlantLifetimePerDay) / 1 days;
+        return (blocksPassed * LibConstants.BLOCK_TIME * productionRatePlantLifetimePerDay) / (1 days * 10);
     }
 
 //    /// @notice Internal function to access AppStorage
