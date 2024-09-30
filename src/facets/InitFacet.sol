@@ -7,6 +7,8 @@ pragma solidity >=0.8.21;
 import  "../libs/LibQuestStorage.sol";
 //import {AccessControl} from "../shared/AccessControl.sol";
 import {AccessControl2} from "../libs/libAccessControl2.sol";
+import {LibMarketPlaceStorage} from "../libs/LibMarketPlaceStorage.sol";
+
 
 
 contract InitFacetTesting is AccessControl2 {
@@ -15,6 +17,14 @@ contract InitFacetTesting is AccessControl2 {
     /// @return data The LibLandBuildingStorage.Data struct
     function _sQ() internal pure returns (LibQuestStorage.Data storage data) {
         data = LibQuestStorage.data();
+    }
+
+//    function _sMP() internal pure returns (LibMarketPlaceStorage.Data storage data) {
+//        data = LibMarketPlaceStorage.data();
+//    }
+
+    function initializeMarketplace() isAdmin() external   {
+        LibMarketPlaceStorage.initializeMarketplace();
     }
 
  function questStorageUpdate() isAdmin() external   {
