@@ -74,12 +74,14 @@ library LibMarketPlace {
 
     // Create order
     function createOrder(
+    uint256 landId,
         LibMarketPlaceStorage.TokenType sellToken,
         uint256 amount
     ) internal
     sufficientBalance(sellToken, amount)
     sufficientAllowance(sellToken, amount)
     sufficientAmount(sellToken, amount)
+    marketPlaceExists(landId)
     {
         IERC20 token = sellToken == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B;
 
@@ -110,9 +112,11 @@ library LibMarketPlace {
     }
 
     // Take order
-    function takeOrder(uint256 orderId) internal
+    function takeOrder(uint256 landId, uint256 orderId) internal
     orderExists(orderId)
     orderActive(orderId)
+    marketPlaceExists(landId)
+
     {
         LibMarketPlaceStorage.Order storage order = _sM().orders[orderId];
         LibMarketPlaceStorage.TokenType sellTokenType = order.sellToken;
@@ -163,9 +167,11 @@ library LibMarketPlace {
     }
 
     // Cancel order
-    function cancelOrder(uint256 orderId) internal
+    function cancelOrder(uint256 landId, uint256 orderId) internal
     orderExists(orderId)
     orderActive(orderId)
+    marketPlaceExists(landId)
+    
     {
         LibMarketPlaceStorage.Order storage order = _sM().orders[orderId];
         require(order.seller == msg.sender, "Only the seller can cancel the order");

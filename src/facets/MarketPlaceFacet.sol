@@ -30,17 +30,17 @@ contract MarketPlaceFacet is AccessControl2 {
         LibMarketPlaceStorage.TokenType sellTokenEnum = sellToken == 0 
             ? LibMarketPlaceStorage.TokenType.A 
             : LibMarketPlaceStorage.TokenType.B;
-        LibMarketPlace.createOrder(sellTokenEnum, amount);
+        LibMarketPlace.createOrder(landId, sellTokenEnum, amount);
     }
 
     // Take order
     function takeOrder(uint256 landId, uint256 orderId) isApproved(landId) external {
-        LibMarketPlace.takeOrder(orderId);
+        LibMarketPlace.takeOrder(landId, orderId);
     }
 
     // Cancel order
     function cancelOrder(uint256 landId, uint256 orderId) isApproved(landId) external {
-        LibMarketPlace.cancelOrder(orderId);
+        LibMarketPlace.cancelOrder(landId, orderId);
     }
 
     // View all active orders
