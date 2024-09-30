@@ -8,6 +8,10 @@ import {LibMarketPlaceStorage} from "../libs/LibMarketPlaceStorage.sol";
 import {AccessControl2} from "../libs/libAccessControl2.sol";
 
 contract MarketPlaceFacet is AccessControl2 {
+
+    function marketPlaceIsActive() external view returns (bool) {
+        return LibMarketPlace._isActive();
+    }
     //using LibMarketPlace for *;
 
     // Events
@@ -20,7 +24,7 @@ contract MarketPlaceFacet is AccessControl2 {
     // event OrderTaken(uint256 orderId, address buyer);
 
     // Create order
-    function createOrder(
+    function marketPlaceCreateOrder(
         uint256 landId,
         uint8 sellToken,
         uint256 amount
@@ -34,27 +38,27 @@ contract MarketPlaceFacet is AccessControl2 {
     }
 
     // Take order
-    function takeOrder(uint256 landId, uint256 orderId) isApproved(landId) external {
+    function marketPlaceTakeOrder(uint256 landId, uint256 orderId) isApproved(landId) external {
         LibMarketPlace.takeOrder(landId, orderId);
     }
 
     // Cancel order
-    function cancelOrder(uint256 landId, uint256 orderId) isApproved(landId) external {
+    function marketPlaceCancelOrder(uint256 landId, uint256 orderId) isApproved(landId) external {
         LibMarketPlace.cancelOrder(landId, orderId);
     }
 
     // View all active orders
-    function getActiveOrders() external view returns (MarketPlaceOrderView[] memory) {
+    function marketPlaceGetActiveOrders() external view returns (MarketPlaceOrderView[] memory) {
         return LibMarketPlace.getActiveOrders();
     }
 
     // View user's orders
-    function getUserOrders(address user) external view returns (MarketPlaceOrderView[] memory) {
+    function marketPlaceGetUserOrders(address user) external view returns (MarketPlaceOrderView[] memory) {
         return LibMarketPlace.getUserOrders(user);
     }
 
     // Getter for all inactive orders
-    function getInactiveOrders() external view returns (MarketPlaceOrderView[] memory) {
+    function marketPlaceGetInactiveOrders() external view returns (MarketPlaceOrderView[] memory) {
         return LibMarketPlace.getInactiveOrders();
     }
 }
