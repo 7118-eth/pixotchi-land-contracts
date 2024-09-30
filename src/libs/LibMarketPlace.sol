@@ -5,12 +5,23 @@ import "./LibMarketPlaceStorage.sol";
 import "./LibTown.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "./LibTown.sol";
 
 
 library LibMarketPlace {
 
+    function _getMarketPlaceLevel(uint256 landId) private view returns (uint256) {
+        return LibTown.getBuildingLevel(landId, LibTownStorage.TownBuildingNaming.MARKET_PLACE);
+    }
+
     function _sM() internal pure returns (LibMarketPlaceStorage.Data storage data) {
         data = LibMarketPlaceStorage.data();
+    }
+
+    // Modifiers
+    modifier marketPlaceExists(uint256 landId) {
+        require(_getMarketPlaceLevel(landId) >= 1,"market place doesnt exist");
+        _;
     }
 
 
