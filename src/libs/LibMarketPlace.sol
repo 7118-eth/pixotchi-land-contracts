@@ -25,6 +25,11 @@ library LibMarketPlace {
     }
 
 
+    modifier isActive() {
+        require(_isActive(), "marketplace is not active");
+        _;
+    }
+
     // Modifiers
     modifier orderExists(uint256 orderId) {
         require(_sM().orders[orderId].amount >= 0, "Order amount must be greater than 0");
@@ -82,6 +87,7 @@ library LibMarketPlace {
     sufficientAllowance(sellToken, amount)
     sufficientAmount(sellToken, amount)
     marketPlaceExists(landId)
+    isActive
     {
         IERC20 token = sellToken == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B;
 
@@ -116,7 +122,7 @@ library LibMarketPlace {
     orderExists(orderId)
     orderActive(orderId)
     marketPlaceExists(landId)
-
+    isActive
     {
         LibMarketPlaceStorage.Order storage order = _sM().orders[orderId];
         LibMarketPlaceStorage.TokenType sellTokenType = order.sellToken;
@@ -171,7 +177,7 @@ library LibMarketPlace {
     orderExists(orderId)
     orderActive(orderId)
     marketPlaceExists(landId)
-    
+    isActive
     {
         LibMarketPlaceStorage.Order storage order = _sM().orders[orderId];
         require(order.seller == msg.sender, "Only the seller can cancel the order");
@@ -277,5 +283,9 @@ library LibMarketPlace {
         }
 
         return inactiveOrders;
+    }
+
+    function _isActive() internal view returns (bool) {
+        return _sM().enabled;
     }
 }
