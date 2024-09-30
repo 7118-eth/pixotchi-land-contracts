@@ -212,4 +212,5 @@ struct Leaderboard {
     uint8 sellToken;
     uint256 amount;
     bool isActive;
+    uint256 amountAsk;
   }

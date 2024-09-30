@@ -72,16 +72,18 @@ library LibMarketPlace {
         uint256 orderId,
         address seller,
         LibMarketPlaceStorage.TokenType sellToken,
-        uint256 amount
+        uint256 amount,
+        uint256 amountAsk
     );
     event OrderTaken(uint256 orderId, address buyer);
-    event OrderCancelled(uint256 orderId, address seller, uint256 amount); // New event
+    event OrderCancelled(uint256 orderId, address seller); // New event
 
     // Create order
     function createOrder(
-    uint256 landId,
+        uint256 landId,
         LibMarketPlaceStorage.TokenType sellToken,
-        uint256 amount
+        uint256 amount,
+        uint256 amountAsk
     ) internal
     sufficientBalance(sellToken, amount)
     sufficientAllowance(sellToken, amount)
@@ -89,32 +91,37 @@ library LibMarketPlace {
     marketPlaceExists(landId)
     isActive
     {
-        IERC20 token = sellToken == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B;
+        uint256 orderId = _saveOrder(sellToken, amount, amountAsk);
+        _transferTokensToContract(sellToken, amount);
 
-        // Transfer tokens from seller to contract
-        require(token.transferFrom(msg.sender, address(this), amount), "Transfer failed");
-
-        // Create order
-        uint256 orderId = _sM().nextOrderId;
-        _sM().orders[orderId] = LibMarketPlaceStorage.Order({
-        //id: orderId,
-            seller: msg.sender,
-            sellToken: sellToken,
-            amount: amount,
-            isActive: true
-        });
-
-        // Update state
-        _sM().nextOrderId += 1;
-        _sM().userOrders[msg.sender].push(orderId);
-
-        // Emit event
         emit OrderCreated(
             orderId,
             msg.sender,
             sellToken,
-            amount
+            amount,
+            amountAsk
         );
+    }
+
+    function _transferTokensToContract(LibMarketPlaceStorage.TokenType sellToken, uint256 amount) private {
+        IERC20 token = sellToken == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B;
+        require(token.transferFrom(msg.sender, address(this), amount), "Transfer failed");
+    }
+
+    function _saveOrder(LibMarketPlaceStorage.TokenType sellToken, uint256 amount, uint256 amountAsk) private returns (uint256) {
+        uint256 orderId = _sM().nextOrderId;
+        _sM().orders[orderId] = LibMarketPlaceStorage.Order({
+            seller: msg.sender,
+            sellToken: sellToken,
+            amount: amount,
+            amountAsk: amountAsk,
+            isActive: true
+        });
+
+        _sM().nextOrderId += 1;
+        _sM().userOrders[msg.sender].push(orderId);
+
+        return orderId;
     }
 
     // Take order
@@ -135,15 +142,16 @@ library LibMarketPlace {
         IERC20 sellToken = sellTokenType == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B;
 
         uint256 amount = order.amount;
+        uint amountAsk = order.amountAsk;
 
 
         require(
-            buyToken.balanceOf(msg.sender) >= amount,
+            buyToken.balanceOf(msg.sender) >= amountAsk,
             "Insufficient balance to buy"
         );
 
         require(
-            buyToken.allowance(msg.sender, address(this)) >= amount,
+            buyToken.allowance(msg.sender, address(this)) >= amountAsk,
             "Insufficient allowance to buy"
         );
 
@@ -162,7 +170,7 @@ library LibMarketPlace {
 
         // Transfer sellToken from contract to buyer
         require(
-            sellToken.transfer(msg.sender, amount),
+            sellToken.transfer(msg.sender, amountAsk),
             "Transfer failed"
         );
 
@@ -192,7 +200,7 @@ library LibMarketPlace {
         require(token.transfer(msg.sender, order.amount), "Refund transfer failed");
 
         // Emit event
-        emit OrderCancelled(orderId, msg.sender, order.amount);
+        emit OrderCancelled(orderId, msg.sender);
     }
 
     // View all active orders
@@ -221,7 +229,8 @@ library LibMarketPlace {
                 seller: order.seller,
                 sellToken: uint8(order.sellToken),
                 amount: order.amount,
-                isActive: order.isActive
+                isActive: order.isActive,
+                amountAsk: order.amountAsk
             });
         }
 
@@ -244,7 +253,8 @@ library LibMarketPlace {
                 seller: order.seller,
                 sellToken: uint8(order.sellToken),
                 amount: order.amount,
-                isActive: order.isActive
+                isActive: order.isActive,
+                amountAsk: order.amountAsk
             });
         }
 
@@ -276,7 +286,8 @@ library LibMarketPlace {
                     seller: order.seller,
                     sellToken: uint8(order.sellToken),
                     amount: order.amount,
-                    isActive: order.isActive
+                    isActive: order.isActive,
+                    amountAsk: order.amountAsk
                 });
                 index += 1;
             }

@@ -48,6 +48,7 @@ library LibMarketPlaceStorage {
         TokenType sellToken;
         uint256 amount;
         bool isActive;
+        uint256 amountAsk;
         //address buyer;
         //uint256 timestamp;
     }

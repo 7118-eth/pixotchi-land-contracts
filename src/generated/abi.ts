@@ -736,6 +736,11 @@ export const abi = [
         "name": "amount",
         "type": "uint256",
         "internalType": "uint256"
+      },
+      {
+        "name": "amountAsk",
+        "type": "uint256",
+        "internalType": "uint256"
       }
     ],
     "outputs": [],
@@ -775,6 +780,11 @@ export const abi = [
             "name": "isActive",
             "type": "bool",
             "internalType": "bool"
+          },
+          {
+            "name": "amountAsk",
+            "type": "uint256",
+            "internalType": "uint256"
           }
         ]
       }
@@ -815,6 +825,11 @@ export const abi = [
             "name": "isActive",
             "type": "bool",
             "internalType": "bool"
+          },
+          {
+            "name": "amountAsk",
+            "type": "uint256",
+            "internalType": "uint256"
           }
         ]
       }
@@ -861,6 +876,11 @@ export const abi = [
             "name": "isActive",
             "type": "bool",
             "internalType": "bool"
+          },
+          {
+            "name": "amountAsk",
+            "type": "uint256",
+            "internalType": "uint256"
           }
         ]
       }
@@ -2505,12 +2525,6 @@ export const abi = [
         "type": "address",
         "indexed": false,
         "internalType": "address"
-      },
-      {
-        "name": "amount",
-        "type": "uint256",
-        "indexed": false,
-        "internalType": "uint256"
       }
     ],
     "anonymous": false
@@ -2539,6 +2553,12 @@ export const abi = [
       },
       {
         "name": "amount",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "amountAsk",
         "type": "uint256",
         "indexed": false,
         "internalType": "uint256"

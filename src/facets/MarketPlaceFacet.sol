@@ -27,14 +27,15 @@ contract MarketPlaceFacet is AccessControl2 {
     function marketPlaceCreateOrder(
         uint256 landId,
         uint8 sellToken,
-        uint256 amount
+        uint256 amount,
+        uint256 amountAsk
     ) external
     isApproved(landId)
     {
         LibMarketPlaceStorage.TokenType sellTokenEnum = sellToken == 0 
             ? LibMarketPlaceStorage.TokenType.A 
             : LibMarketPlaceStorage.TokenType.B;
-        LibMarketPlace.createOrder(landId, sellTokenEnum, amount);
+        LibMarketPlace.createOrder(landId, sellTokenEnum, amount, amountAsk);
     }
 
     // Take order
