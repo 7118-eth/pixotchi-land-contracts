@@ -205,3 +205,11 @@ struct Leaderboard {
 //        uint256[] levelUpgradeBlockInterval;
 //        /// @notice Whether this building type produces plant points
 //    }
+
+  struct MarketPlaceOrderView {
+    uint256 id;
+    address seller;
+    uint8 sellToken;
+    uint256 amount;
+    bool isActive;
+  }
