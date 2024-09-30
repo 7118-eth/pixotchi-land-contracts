@@ -12,6 +12,7 @@ import { LibQuestStorage } from "../libs/LibQuestStorage.sol";
 import { LibAccessControl2Storage } from "../libs/LibAccessControl2Storage.sol";
 //import { LibPaymentStorage } from "../libs/LibPaymentStorage.sol";
 import { LibMintControlStorage } from "../libs/LibMintControlStorage.sol";
+import { LibMarketPlaceStorage } from "../libs/LibMarketPlaceStorage.sol";
 
 contract InitDiamond /*is NFTInit*/ {
   event InitializeDiamond(address sender);
@@ -45,6 +46,8 @@ contract InitDiamond /*is NFTInit*/ {
     LibAccessControl2Storage.initAccessControl2Storage();
 
     LibMintControlStorage.initMintControlStorage();
+
+    LibMarketPlaceStorage.initializeMarketplace();
 
 
     _sD().supportedInterfaces[0x01ffc9a7] = true; // ERC165 interface ID for ERC165.
