@@ -36,6 +36,8 @@ struct Land {
   uint256 accumulatedPlantPoints;
   /// @notice Total lifetime of all plants grown on this land
   uint256 accumulatedPlantLifetime;
+  /// @notice Farmer Avatar id
+  uint8 farmerAvatar;
 }
 
 /// @notice Represents a building in the game
