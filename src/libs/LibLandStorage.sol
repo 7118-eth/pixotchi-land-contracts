@@ -96,5 +96,8 @@ library LibLandStorage {
         
         /// @notice Mapping from token ID to its accumulated plant lifetime
         mapping(uint256 => uint256) accumulatedPlantLifetime;
+
+        /// @notice Mapping from token ID to its accumulated plant lifetime
+        mapping(uint256 => uint8) farmerAvatar;
     }
 }
