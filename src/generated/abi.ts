@@ -498,6 +498,11 @@ export const abi = [
             "name": "accumulatedPlantLifetime",
             "type": "uint256",
             "internalType": "uint256"
+          },
+          {
+            "name": "farmerAvatar",
+            "type": "uint8",
+            "internalType": "uint8"
           }
         ]
       }
@@ -569,6 +574,11 @@ export const abi = [
             "name": "accumulatedPlantLifetime",
             "type": "uint256",
             "internalType": "uint256"
+          },
+          {
+            "name": "farmerAvatar",
+            "type": "uint8",
+            "internalType": "uint8"
           }
         ]
       }

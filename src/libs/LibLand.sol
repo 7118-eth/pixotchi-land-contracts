@@ -8,6 +8,7 @@ import {IERC721} from "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import {IERC721Enumerable} from "@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol";
 import {LibLandStorage} from "./LibLandStorage.sol";
 import {LibERC721} from "./LibERC721.sol";
+import {libPseudoRnd} from "./libPseudoRnd.sol";
 
 /// @title LibLand
 /// @notice A library for managing land-related operations in the Pixotchi game
@@ -105,6 +106,7 @@ library LibLand {
     function _AssignLand(uint256 tokenId) internal {
         _landAssignCoordinates(tokenId);
         _sN().mintDate[tokenId] = block.timestamp;
+        _sN().farmerAvatar[tokenId] = libPseudoRnd.getBiasedAlternatingOutput(tokenId);
     }
 
 //    /// @notice Retrieves the buildings in a village for a given token ID
@@ -187,6 +189,7 @@ library LibLand {
         land.experiencePoints = s.experiencePoints[tokenId];
         land.accumulatedPlantPoints = s.accumulatedPlantPoints[tokenId];
         land.accumulatedPlantLifetime = s.accumulatedPlantLifetime[tokenId];
+        land.farmerAvatar = libPseudoRnd.getBiasedAlternatingOutput(tokenId); //FORNOW: TODO: use s.farmerAvatar[tokenId];
 
 
         land.tokenUri = ""; // TODO
