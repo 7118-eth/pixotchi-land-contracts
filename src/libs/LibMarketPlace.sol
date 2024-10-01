@@ -129,6 +129,7 @@ library LibMarketPlace {
     orderExists(orderId)
     orderActive(orderId)
     marketPlaceExists(landId)
+    //TODO: add check for amountAsk
     isActive
     {
         LibMarketPlaceStorage.Order storage order = _sM().orders[orderId];
