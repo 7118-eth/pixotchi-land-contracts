@@ -229,6 +229,10 @@ library LibQuest {
         rewardAmount = (randomNumber % rewardRange) + minReward;
         rewardAmount *= _sQ().questDifficulties[difficultyLevel].rewardMultiplier;
 
+        if (rewardType == RewardType.XP) {
+            rewardAmount = ((rewardAmount / LibConstants.XP_DECIMALS) * LibConstants.XP_DECIMALS) ;
+        }
+
     // // Assign the reward (call dummy functions)
     //     if (rewardType == RewardType.SEED) {
     //         _assignSeedReward(rewardAmount);
