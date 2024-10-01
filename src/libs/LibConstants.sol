@@ -31,7 +31,7 @@ library LibConstants {
     // New constant for plant point decimals
     uint256 internal constant PLANT_POINT_DECIMALS = 12;
 
-    uint256 internal constant XP_DECIMALS = 1 ether; // 1e18
+    uint256 internal constant XP_DECIMALS = 18; // 1 ether; // 1e18
 
     // error UnsupportedNetwork(); // Commented out
 
