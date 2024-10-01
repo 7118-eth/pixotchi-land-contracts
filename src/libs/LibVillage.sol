@@ -283,7 +283,7 @@ library LibVillage {
         // (blocksPassed * BLOCK_TIME) converts blocks to seconds
         // (... * productionRatePlantLifetimePerDay) calculates total lifetime for the time period
         // Finally, divide by (1 days) to get the fraction of daily production
-        return (blocksPassed * LibConstants.BLOCK_TIME * productionRatePlantLifetimePerDay) / (1 days * 10);
+        return (blocksPassed * LibConstants.BLOCK_TIME * productionRatePlantLifetimePerDay) / (1 days );
     }
 
 //    /// @notice Internal function to access AppStorage
