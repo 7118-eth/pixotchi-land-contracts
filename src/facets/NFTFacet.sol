@@ -10,6 +10,7 @@ import { INFTFacet } from "../interfaces/INFTFacet.sol";
 import { AccessControl2 } from "../libs/libAccessControl2.sol";
 import { MintControl, LibMintControl } from "../libs/libMintControl.sol";
 import {LibPayment} from "../libs/LibPayment.sol";
+import {LibMetaData} from "../libs/LibMetaData.sol";
 
 contract NFTFacet is
   ERC721EnumerableUpgradeable,
@@ -97,7 +98,11 @@ contract NFTFacet is
   function tokenURI(
     uint256 tokenId
   ) public view virtual override(ERC721Upgradeable) returns (string memory) {
-    return super.tokenURI(tokenId);
+    return LibMetaData.tokenURI(tokenId);
+  }
+
+  function contractURI() public pure returns (string memory) {
+    return LibMetaData.contractURI();
   }
 
   function approve(
