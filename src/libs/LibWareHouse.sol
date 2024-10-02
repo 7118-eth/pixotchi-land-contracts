@@ -8,7 +8,8 @@ import {ILandToPlant} from "../shared/ILandToPlant.sol";
 
 library LibWareHouse {
 
-    ILandToPlant internal constant landToPlant = ILandToPlant(0x1723a3F01895c207954d09F633a819c210d758c4);
+    ILandToPlant internal constant landToPlant_testnet = ILandToPlant(0x1723a3F01895c207954d09F633a819c210d758c4);
+    ILandToPlant internal constant landToPlant = ILandToPlant(0xeb4e16c804AE9275a655AbBc20cD0658A91F9235); //mainnet
 
     event WareHousePlantPointsAssigned(uint256 indexed landId, uint256 indexed plantId, uint256 addedPoints, uint256 newPlantPoints);
     event WareHouseLifetimeAssigned(uint256 indexed landId, uint256 indexed plantId, uint256 lifetime, uint256 newLifetime);
