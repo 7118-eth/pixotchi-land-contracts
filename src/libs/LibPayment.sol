@@ -87,6 +87,6 @@ library LibPayment {
         // No state variables to update in this case
 
         // Interactions
-        SafeERC20.safeTransfer(IERC20(tokenAddress), to, amount);
+        SafeERC20.safeTransferFrom(IERC20(tokenAddress), from, to, amount);
     }
 }
