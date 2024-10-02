@@ -48,6 +48,24 @@ contract NFTFacet is
     emit LandMinted(to, _tokenId, _mintPrice);
   }
 
+    /// @notice Internal function to mint NFTs with specific coordinate assignment
+  /// @param to The address to mint the NFT to
+  function _nftMintFree(address to) internal {
+    uint256 supply = totalSupply();
+    require(supply + 1 <= _sN().maxSupply, "Exceeds max supply");
+
+    uint256 _tokenId = _sN().nextTokenId++;
+
+    LibLand._AssignLand(_tokenId);
+
+    //uint256 _mintPrice = LibMintControl.getMintPrice();
+    //LibPayment.paymentPayWithSeed(msg.sender, _mintPrice);
+
+    _safeMint(to, _tokenId);
+
+    emit LandMinted(to, _tokenId, 0);
+  }
+
   function _sN() internal pure returns (LibLandStorage.Data storage data) {
     data = LibLandStorage.data();
   }
@@ -195,4 +213,14 @@ contract NFTFacet is
   //    function tokensOfOwner(address owner) public view virtual override returns (uint256[] memory) {
   //        return super.tokensOfOwner(owner);
   //    }
+
+  /// @notice Airdrops NFTs to multiple wallets
+  /// @param recipients An array of wallet addresses to receive the airdropped NFTs
+  /// @dev Only callable by admin
+  function airdrop(address[] calldata recipients) external isAdmin {
+    for (uint256 i = 0; i < recipients.length; i++) {
+      _nftMintFree(recipients[i]);
+    }
+  }
+
 }

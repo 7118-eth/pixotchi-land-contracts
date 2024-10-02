@@ -137,6 +137,19 @@ export const abi = [
   },
   {
     "type": "function",
+    "name": "airdrop",
+    "inputs": [
+      {
+        "name": "recipients",
+        "type": "address[]",
+        "internalType": "address[]"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "approve",
     "inputs": [
       {
@@ -3199,6 +3212,11 @@ export const abi = [
   },
   {
     "type": "error",
+    "name": "AccessControlCallerMustBeAdmin",
+    "inputs": []
+  },
+  {
+    "type": "error",
     "name": "ERC721EnumerableForbiddenBatchMint",
     "inputs": []
   },
@@ -3280,11 +3298,6 @@ export const abi = [
         "internalType": "uint256"
       }
     ]
-  },
-  {
-    "type": "error",
-    "name": "AccessControlCallerMustBeAdmin",
-    "inputs": []
   },
   {
     "type": "error",
