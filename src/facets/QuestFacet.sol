@@ -40,7 +40,7 @@ contract QuestFacet is AccessControl2 {
         if (success && rewardAmount > 0) {
             if (rewardType == RewardType.SEED) {
                 address owner = LibERC721._requireOwned(landId);
-                LibPayment.rewardWithLeaf(owner, rewardAmount);
+                LibPayment.rewardWithSeed(owner, rewardAmount);
             } else if (rewardType == RewardType.LEAF) {
                 address owner = LibERC721._requireOwned(landId);
                 LibPayment.rewardWithLeaf(owner, rewardAmount);
