@@ -79,24 +79,24 @@ library LibVillageStorage {
     /// @param buildingType The VillageBuildingType struct to initialize
     function _initSoilFactoryLevels(VillageBuildingType storage buildingType) internal {
         buildingType.levelData[1] = LevelData({
-            levelUpgradeCostLeaf: 750000 ether,
-            levelUpgradeCostSeedInstant: 500 ether,
+            levelUpgradeCostLeaf: 750_000 ether,
+            levelUpgradeCostSeedInstant: 200 ether,
             levelUpgradeBlockInterval: 24 hours / BLOCK_TIME,
             productionRatePlantLifetimePerDay: 0,
             productionRatePlantPointsPerDay: 70 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
         });
 
         buildingType.levelData[2] = LevelData({
-            levelUpgradeCostLeaf: 1000000 ether,
-            levelUpgradeCostSeedInstant: 1250 ether,
+            levelUpgradeCostLeaf: 5_000_000 ether,
+            levelUpgradeCostSeedInstant: 600 ether,
             levelUpgradeBlockInterval: 60 hours / BLOCK_TIME,
             productionRatePlantLifetimePerDay: 0,
             productionRatePlantPointsPerDay: 150 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
         });
 
         buildingType.levelData[3] = LevelData({
-            levelUpgradeCostLeaf: 3000000 ether,
-            levelUpgradeCostSeedInstant: 2000 ether,
+            levelUpgradeCostLeaf: 20_00_0000 ether,
+            levelUpgradeCostSeedInstant: 1_500 ether,
             levelUpgradeBlockInterval: 96 hours / BLOCK_TIME,
             productionRatePlantLifetimePerDay: 0,
             productionRatePlantPointsPerDay: 300 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
@@ -107,24 +107,24 @@ library LibVillageStorage {
     /// @param buildingType The VillageBuildingType struct to initialize
     function _initSolarPanelLevels(VillageBuildingType storage buildingType) internal {
         buildingType.levelData[1] = LevelData({
-            levelUpgradeCostLeaf: 800000 ether,
-            levelUpgradeCostSeedInstant: 750 ether,
+            levelUpgradeCostLeaf: 800_000 ether,
+            levelUpgradeCostSeedInstant: 250 ether,
             levelUpgradeBlockInterval: 36 hours / BLOCK_TIME,
             productionRatePlantLifetimePerDay: 0,
             productionRatePlantPointsPerDay: 50 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
         });
 
         buildingType.levelData[2] = LevelData({
-            levelUpgradeCostLeaf: 1100000 ether,
-            levelUpgradeCostSeedInstant: 1000 ether,
+            levelUpgradeCostLeaf: 4_500_000 ether,
+            levelUpgradeCostSeedInstant: 700 ether,
             levelUpgradeBlockInterval: 48 hours / BLOCK_TIME,
             productionRatePlantLifetimePerDay: 0,
             productionRatePlantPointsPerDay: 100 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
         });
 
         buildingType.levelData[3] = LevelData({
-            levelUpgradeCostLeaf: 1500000 ether,
-            levelUpgradeCostSeedInstant: 1625 ether,
+            levelUpgradeCostLeaf: 19_000_000 ether,
+            levelUpgradeCostSeedInstant: 1_800 ether,
             levelUpgradeBlockInterval: 78 hours / BLOCK_TIME,
             productionRatePlantLifetimePerDay: 0,
             productionRatePlantPointsPerDay: 150 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
@@ -135,24 +135,24 @@ library LibVillageStorage {
     /// @param buildingType The VillageBuildingType struct to initialize
     function _initBeeFarmLevels(VillageBuildingType storage buildingType) internal {
         buildingType.levelData[1] = LevelData({
-            levelUpgradeCostLeaf: 500000 ether,
-            levelUpgradeCostSeedInstant: 125 ether,
+            levelUpgradeCostLeaf: 500_000 ether,
+            levelUpgradeCostSeedInstant: 175 ether,
             levelUpgradeBlockInterval: 6 hours / BLOCK_TIME,
             productionRatePlantLifetimePerDay: 6 hours,
             productionRatePlantPointsPerDay: 0
         });
 
         buildingType.levelData[2] = LevelData({
-            levelUpgradeCostLeaf: 750000 ether,
-            levelUpgradeCostSeedInstant: 375 ether,
+            levelUpgradeCostLeaf: 2_500_000 ether,
+            levelUpgradeCostSeedInstant: 500 ether,
             levelUpgradeBlockInterval: 18 hours / BLOCK_TIME,
             productionRatePlantLifetimePerDay: 12 hours,
             productionRatePlantPointsPerDay: 0
         });
 
         buildingType.levelData[3] = LevelData({
-            levelUpgradeCostLeaf: 1000000 ether,
-            levelUpgradeCostSeedInstant: 625 ether,
+            levelUpgradeCostLeaf: 12_500_000 ether,
+            levelUpgradeCostSeedInstant: 1_000 ether,
             levelUpgradeBlockInterval: 30 hours / BLOCK_TIME,
             productionRatePlantLifetimePerDay: 24 hours,
             productionRatePlantPointsPerDay: 0
