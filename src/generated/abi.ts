@@ -376,6 +376,13 @@ export const abi = [
   },
   {
     "type": "function",
+    "name": "initializeMarketplace",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "isApprovedForAll",
     "inputs": [
       {
@@ -1122,6 +1129,13 @@ export const abi = [
   },
   {
     "type": "function",
+    "name": "questStorageUpdate",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "safeTransferFrom",
     "inputs": [
       {
@@ -1354,6 +1368,13 @@ export const abi = [
   },
   {
     "type": "function",
+    "name": "townStorageUpdate",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "townUpgradeWithLeaf",
     "inputs": [
       {
@@ -1554,6 +1575,13 @@ export const abi = [
         "internalType": "uint8"
       }
     ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "villageStorageUpdate",
+    "inputs": [],
     "outputs": [],
     "stateMutability": "nonpayable"
   },
@@ -2577,25 +2605,6 @@ export const abi = [
         "type": "address",
         "indexed": false,
         "internalType": "address"
-      }
-    ],
-    "anonymous": false
-  },
-  {
-    "type": "event",
-    "name": "XPAdded",
-    "inputs": [
-      {
-        "name": "tokenId",
-        "type": "uint256",
-        "indexed": true,
-        "internalType": "uint256"
-      },
-      {
-        "name": "amount",
-        "type": "uint256",
-        "indexed": false,
-        "internalType": "uint256"
       }
     ],
     "anonymous": false

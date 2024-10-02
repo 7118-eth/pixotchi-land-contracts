@@ -13,7 +13,7 @@ import {LibTownStorage} from "../libs/LibTownStorage.sol";
 
 
 
-contract InitFacetTesting is AccessControl2 {
+contract InitTesting2Facet is AccessControl2 {
 
     /// @notice Internal function to access NFT Building storage
     /// @return data The LibLandBuildingStorage.Data struct
