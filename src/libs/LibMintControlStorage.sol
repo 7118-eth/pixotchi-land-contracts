@@ -26,7 +26,7 @@ library LibMintControlStorage {
         Data storage s = data();
 
 
-        s.mintActive = true;
+        s.mintActive = false;
 
         s.mintPrice = 100 ether; //100 SEED TOKEN;
 
