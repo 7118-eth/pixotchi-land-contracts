@@ -14,7 +14,8 @@
     "deploy:local": "gemforge build && gemforge deploy local --new",
     "deploy:testnet": "gemforge build && gemforge deploy testnet",
     "init:storage:testnet": "ts-node scripts/init.ts",
-    "land-cli": "ts-node scripts/land-cli.ts"
+    "land-cli": "ts-node scripts/land-cli.ts",
+    "deploy:base": "gemforge build && gemforge deploy base"
   },
   "devDependencies": {
     "@pixotchi.tech/gemforge": "^2.7.1-0",
