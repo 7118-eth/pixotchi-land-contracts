@@ -138,7 +138,7 @@ library LibVillageStorage {
             levelUpgradeCostLeaf: 500_000 ether,
             levelUpgradeCostSeedInstant: 175 ether,
             levelUpgradeBlockInterval: 6 hours / BLOCK_TIME,
-            productionRatePlantLifetimePerDay: 6 hours,
+            productionRatePlantLifetimePerDay: 3 hours,//6 hours,
             productionRatePlantPointsPerDay: 0
         });
 
@@ -146,7 +146,7 @@ library LibVillageStorage {
             levelUpgradeCostLeaf: 2_500_000 ether,
             levelUpgradeCostSeedInstant: 500 ether,
             levelUpgradeBlockInterval: 18 hours / BLOCK_TIME,
-            productionRatePlantLifetimePerDay: 12 hours,
+            productionRatePlantLifetimePerDay: 6 hours,//12 hours,
             productionRatePlantPointsPerDay: 0
         });
 
@@ -154,7 +154,7 @@ library LibVillageStorage {
             levelUpgradeCostLeaf: 12_500_000 ether,
             levelUpgradeCostSeedInstant: 1_000 ether,
             levelUpgradeBlockInterval: 30 hours / BLOCK_TIME,
-            productionRatePlantLifetimePerDay: 24 hours,
+            productionRatePlantLifetimePerDay: 9 hours,//24 hours,
             productionRatePlantPointsPerDay: 0
         });
     }
