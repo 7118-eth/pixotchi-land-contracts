@@ -23,6 +23,12 @@ library LibConstants {
     address internal constant MAINNET_SEED_SEND_ADDRESS = address(0x1b6742E960d77F416D1b14F1f837523103CAccB4); //TODO: Change this
     address internal constant MAINNET_LEAF_SEND_ADDRESS = address(0x1b6742E960d77F416D1b14F1f837523103CAccB4); //TODO: Change this
 
+    // Constants for marketplace exchange addresses
+    address internal constant TESTNET_MARKETPLACE_EXCHANGE_ADDRESS = address(0x0000000000000000000000000000000000000000); // TODO: Update with actual address
+    //address internal constant TESTNET_MARKETPLACE_LEAF_EXCHANGE_ADDRESS = address(0x0000000000000000000000000000000000000000); // TODO: Update with actual address
+    address internal constant MAINNET_MARKETPLACE_EXCHANGE_ADDRESS = address(0x0000000000000000000000000000000000000000); // TODO: Update with actual address
+    //address internal constant MAINNET_MARKETPLACE_LEAF_EXCHANGE_ADDRESS = address(0x0000000000000000000000000000000000000000); // TODO: Update with actual address
+
 
     // Constants for chain IDs
     uint256 internal constant TESTNET_CHAIN_ID = 84532;
@@ -106,6 +112,27 @@ library LibConstants {
             return TESTNET_LEAF_SEND_ADDRESS; // Use testnet for all other chain IDs
         }
     }
+
+
+    /// @notice Get the marketplace exchange address based on the network
+    /// @return The marketplace exchange address for the current network
+    function getMarketplaceExchangeAddress() internal view returns (address) {
+        if (block.chainid == MAINNET_CHAIN_ID) {
+            return MAINNET_MARKETPLACE_EXCHANGE_ADDRESS;
+        } else {
+            return TESTNET_MARKETPLACE_EXCHANGE_ADDRESS; // Use testnet for all other chain IDs
+        }
+    }
+
+/*    /// @notice Get the marketplace leaf exchange address based on the network
+    /// @return The marketplace leaf exchange address for the current network
+    function getMarketplaceLeafExchangeAddress() internal view returns (address) {
+        if (block.chainid == MAINNET_CHAIN_ID) {
+            return MAINNET_MARKETPLACE_LEAF_EXCHANGE_ADDRESS;
+        } else {
+            return TESTNET_MARKETPLACE_LEAF_EXCHANGE_ADDRESS; // Use testnet for all other chain IDs
+        }
+    }*/
 
   function hoursToBlocks(uint256 _hours) internal pure returns (uint256) {
     return (_hours * 3600) / BLOCK_TIME;
