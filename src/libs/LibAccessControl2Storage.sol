@@ -28,8 +28,9 @@ library LibAccessControl2Storage {
         //TODO: temporary
         s.paused = true;
         s.whitelistOnly = true;
-        //s.whitelistAddress[0xC3f88d5925d9aa2ccc7b6cb65c5F8c7626591Daf] = true; //testnet deployer
-        //s.whitelistAddress[0x4805A72dB752468C0a06D4Eb7d2CcB879315B0ff] = true; //testnet owner
+        s.whitelistAddress[0x816795f1CD1603b0d1b172853D69b73800eC3359] = true;
+        s.whitelistAddress[0x38dc5ED4FC0F64d3EecC52c2CdfD91Fc569fb926] = true;
+        s.whitelistAddress[0x6583F8C38E576d81d32e48e87BE922aD88e49F38] = true;
 
 
 
