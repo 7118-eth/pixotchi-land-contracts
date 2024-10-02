@@ -8,6 +8,8 @@ import  "../libs/LibQuestStorage.sol";
 //import {AccessControl} from "../shared/AccessControl.sol";
 import {AccessControl2} from "../libs/libAccessControl2.sol";
 import {LibMarketPlaceStorage} from "../libs/LibMarketPlaceStorage.sol";
+import {LibVillageStorage} from "../libs/LibVillageStorage.sol";
+import {LibTownStorage} from "../libs/LibTownStorage.sol";
 
 
 
@@ -25,6 +27,21 @@ contract InitFacetTesting is AccessControl2 {
 
     function initializeMarketplace() isAdmin() external   {
         LibMarketPlaceStorage.initializeMarketplace();
+    }
+
+    function townStorageUpdate() isAdmin external {
+        //_initBeeFarmLevels(s.villageBuildingTypes[uint8(VillageBuildingNaming.BEE_FARM)]);
+        //Data storage s = data();
+        //LibTownStorage.data townStorage = LibTownStorage.data();
+        LibTownStorage.Data storage townStorage = LibTownStorage.data();
+        LibTownStorage._initBuildingTypes(townStorage);
+
+
+    }
+
+    function villageStorageUpdate() isAdmin external {
+        LibVillageStorage.Data storage villageStorage = LibVillageStorage.data();
+        LibVillageStorage._initBuildingTypes(villageStorage);
     }
 
  function questStorageUpdate() isAdmin() external   {

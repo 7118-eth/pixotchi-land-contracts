@@ -376,13 +376,6 @@ export const abi = [
   },
   {
     "type": "function",
-    "name": "initializeMarketplace",
-    "inputs": [],
-    "outputs": [],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "function",
     "name": "isApprovedForAll",
     "inputs": [
       {
@@ -1124,13 +1117,6 @@ export const abi = [
         "internalType": "uint256"
       }
     ],
-    "outputs": [],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "function",
-    "name": "questStorageUpdate",
-    "inputs": [],
     "outputs": [],
     "stateMutability": "nonpayable"
   },
