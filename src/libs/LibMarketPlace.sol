@@ -6,6 +6,7 @@ import "./LibTown.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "./LibTown.sol";
+import {LibConstants} from "./LibConstants.sol";
 
 
 library LibMarketPlace {
@@ -105,7 +106,9 @@ library LibMarketPlace {
 
     function _transferTokensToContract(LibMarketPlaceStorage.TokenType sellToken, uint256 amount) private {
         IERC20 token = sellToken == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B;
-        require(token.transferFrom(msg.sender, address(this), amount), "Transfer failed");
+        //require(token.transferFrom(msg.sender, address(this), amount), "Transfer failed");
+        address from = LibConstants.getMarketplaceExchangeAddress();
+        SafeERC20.safeTransferFrom(IERC20(token), from, msg.sender, amount);
     }
 
     function _saveOrder(LibMarketPlaceStorage.TokenType sellToken, uint256 amount, uint256 amountAsk) private returns (uint256) {
@@ -159,6 +162,8 @@ library LibMarketPlace {
         // Mark order as inactive
         order.isActive = false;
 
+
+
         // Transfer buyToken from buyer to seller
         require(
             buyToken.transferFrom(
@@ -169,9 +174,11 @@ library LibMarketPlace {
             "Transfer failed"
         );
 
+        address from = LibConstants.getMarketplaceExchangeAddress();
+
         // Transfer sellToken from contract to buyer
         require(
-            sellToken.transfer(msg.sender, amountAsk),
+            sellToken.transferFrom(from, msg.sender, amountAsk),
             "Transfer failed"
         );
 
