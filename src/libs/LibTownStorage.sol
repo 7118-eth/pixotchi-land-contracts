@@ -133,7 +133,7 @@ library LibTownStorage {
 
     function _initMarketPlaceLevels(TownBuildingType storage buildingType) internal {
         buildingType.levelData[1] = LevelData({
-            levelUpgradeCostLeaf: 400000 ether,
+            levelUpgradeCostLeaf: 400_000 ether,
             levelUpgradeCostSeedInstant: 230 ether,
             levelUpgradeBlockInterval: 10 hours / BLOCK_TIME
         });
@@ -141,20 +141,20 @@ library LibTownStorage {
 
     function _initQuestHouseLevels(TownBuildingType storage buildingType) internal {
         buildingType.levelData[1] = LevelData({
-            levelUpgradeCostLeaf: 500000 ether,
+            levelUpgradeCostLeaf: 550_000 ether,
             levelUpgradeCostSeedInstant: 250 ether,
             levelUpgradeBlockInterval: 12 hours / BLOCK_TIME
         });
 
         buildingType.levelData[2] = LevelData({
-            levelUpgradeCostLeaf: 750000 ether,
+            levelUpgradeCostLeaf: 12_000_000 ether,
             levelUpgradeCostSeedInstant: 625 ether,
             levelUpgradeBlockInterval: 30 hours / BLOCK_TIME
         });
 
         buildingType.levelData[3] = LevelData({
-            levelUpgradeCostLeaf: 2000000 ether,
-            levelUpgradeCostSeedInstant: 1500 ether,
+            levelUpgradeCostLeaf: 18_000_000 ether,
+            levelUpgradeCostSeedInstant: 1_450 ether,
             levelUpgradeBlockInterval: 72 hours / BLOCK_TIME
         });
     }
