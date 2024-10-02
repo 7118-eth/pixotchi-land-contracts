@@ -21,7 +21,7 @@ contract NFTFacet is
   event LandMinted(address indexed to, uint256 tokenId, uint256 mintPrice);
 
   function initNFTFacet() external initializer {
-    __ERC721_init("Land02", "LAND02");
+    __ERC721_init("Land", "LAND");
     _mint(msg.sender, _sN().nextTokenId++);
   }
 
