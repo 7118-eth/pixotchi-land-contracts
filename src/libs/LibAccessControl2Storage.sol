@@ -26,10 +26,10 @@ library LibAccessControl2Storage {
         Data storage s = data();
 
         //TODO: temporary
-        s.paused = false;
-        s.whitelistOnly = false;
-        s.whitelistAddress[0xC3f88d5925d9aa2ccc7b6cb65c5F8c7626591Daf] = true; //testnet deployer
-        s.whitelistAddress[0x4805A72dB752468C0a06D4Eb7d2CcB879315B0ff] = true; //testnet owner
+        s.paused = true;
+        s.whitelistOnly = true;
+        //s.whitelistAddress[0xC3f88d5925d9aa2ccc7b6cb65c5F8c7626591Daf] = true; //testnet deployer
+        //s.whitelistAddress[0x4805A72dB752468C0a06D4Eb7d2CcB879315B0ff] = true; //testnet owner
 
 
 
