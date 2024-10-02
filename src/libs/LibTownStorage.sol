@@ -135,7 +135,7 @@ library LibTownStorage {
         buildingType.levelData[1] = LevelData({
             levelUpgradeCostLeaf: 400_000 ether,
             levelUpgradeCostSeedInstant: 230 ether,
-            levelUpgradeBlockInterval: 10 hours / BLOCK_TIME
+            levelUpgradeBlockInterval: 24 hours / BLOCK_TIME
         });
     }
 
@@ -143,19 +143,19 @@ library LibTownStorage {
         buildingType.levelData[1] = LevelData({
             levelUpgradeCostLeaf: 550_000 ether,
             levelUpgradeCostSeedInstant: 250 ether,
-            levelUpgradeBlockInterval: 12 hours / BLOCK_TIME
+            levelUpgradeBlockInterval: 24 hours / BLOCK_TIME
         });
 
         buildingType.levelData[2] = LevelData({
             levelUpgradeCostLeaf: 12_000_000 ether,
             levelUpgradeCostSeedInstant: 625 ether,
-            levelUpgradeBlockInterval: 30 hours / BLOCK_TIME
+            levelUpgradeBlockInterval: 50 hours / BLOCK_TIME
         });
 
         buildingType.levelData[3] = LevelData({
             levelUpgradeCostLeaf: 18_000_000 ether,
             levelUpgradeCostSeedInstant: 1_450 ether,
-            levelUpgradeBlockInterval: 72 hours / BLOCK_TIME
+            levelUpgradeBlockInterval: 90 hours / BLOCK_TIME
         });
     }
 }
