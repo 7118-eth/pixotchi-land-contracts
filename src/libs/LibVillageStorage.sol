@@ -83,7 +83,7 @@ library LibVillageStorage {
             levelUpgradeCostSeedInstant: 500 ether,
             levelUpgradeBlockInterval: 24 hours / BLOCK_TIME,
             productionRatePlantLifetimePerDay: 0,
-            productionRatePlantPointsPerDay: 250 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
+            productionRatePlantPointsPerDay: 70 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
         });
 
         buildingType.levelData[2] = LevelData({
@@ -91,7 +91,7 @@ library LibVillageStorage {
             levelUpgradeCostSeedInstant: 1250 ether,
             levelUpgradeBlockInterval: 60 hours / BLOCK_TIME,
             productionRatePlantLifetimePerDay: 0,
-            productionRatePlantPointsPerDay: 500 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
+            productionRatePlantPointsPerDay: 150 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
         });
 
         buildingType.levelData[3] = LevelData({
@@ -99,7 +99,7 @@ library LibVillageStorage {
             levelUpgradeCostSeedInstant: 2000 ether,
             levelUpgradeBlockInterval: 96 hours / BLOCK_TIME,
             productionRatePlantLifetimePerDay: 0,
-            productionRatePlantPointsPerDay: 1000 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
+            productionRatePlantPointsPerDay: 300 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
         });
     }
 
@@ -111,7 +111,7 @@ library LibVillageStorage {
             levelUpgradeCostSeedInstant: 750 ether,
             levelUpgradeBlockInterval: 36 hours / BLOCK_TIME,
             productionRatePlantLifetimePerDay: 0,
-            productionRatePlantPointsPerDay: 200 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
+            productionRatePlantPointsPerDay: 50 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
         });
 
         buildingType.levelData[2] = LevelData({
@@ -119,7 +119,7 @@ library LibVillageStorage {
             levelUpgradeCostSeedInstant: 1000 ether,
             levelUpgradeBlockInterval: 48 hours / BLOCK_TIME,
             productionRatePlantLifetimePerDay: 0,
-            productionRatePlantPointsPerDay: 350 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
+            productionRatePlantPointsPerDay: 100 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
         });
 
         buildingType.levelData[3] = LevelData({
@@ -127,7 +127,7 @@ library LibVillageStorage {
             levelUpgradeCostSeedInstant: 1625 ether,
             levelUpgradeBlockInterval: 78 hours / BLOCK_TIME,
             productionRatePlantLifetimePerDay: 0,
-            productionRatePlantPointsPerDay: 500 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
+            productionRatePlantPointsPerDay: 150 * (10 ** LibConstants.PLANT_POINT_DECIMALS)
         });
     }
 
