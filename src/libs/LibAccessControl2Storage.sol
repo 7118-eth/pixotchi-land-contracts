@@ -31,6 +31,7 @@ library LibAccessControl2Storage {
         s.whitelistAddress[0x816795f1CD1603b0d1b172853D69b73800eC3359] = true;
         s.whitelistAddress[0x38dc5ED4FC0F64d3EecC52c2CdfD91Fc569fb926] = true;
         s.whitelistAddress[0x6583F8C38E576d81d32e48e87BE922aD88e49F38] = true;
+        s.whitelistAddress[0xAbF9ffdB1CC9728fFf1B783C1322Cd71dc382aB8] = true;
 
 
 

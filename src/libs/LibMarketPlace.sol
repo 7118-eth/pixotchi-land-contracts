@@ -61,8 +61,10 @@ library LibMarketPlace {
 
 
 
-    IERC20 public constant TOKEN_A = IERC20(0xc64F740D216B6ec49e435a8a08132529788e8DD0);
-    IERC20 public constant TOKEN_B = IERC20(0x33feeD5a3eD803dc03BBF4B6041bB2b86FACD6C4);
+    //IERC20 public constant TOKEN_A_TESTNET = IERC20(0xc64F740D216B6ec49e435a8a08132529788e8DD0);
+    //IERC20 public constant TOKEN_B_TESTNET = IERC20(0x33feeD5a3eD803dc03BBF4B6041bB2b86FACD6C4);
+    IERC20 public constant TOKEN_A = IERC20(0x546D239032b24eCEEE0cb05c92FC39090846adc7); //SEED
+    IERC20 public constant TOKEN_B = IERC20(0xE78ee52349D7b031E2A6633E07c037C3147DB116); //LEAF
 
     using SafeERC20 for IERC20;
 
@@ -108,7 +110,7 @@ library LibMarketPlace {
         IERC20 token = sellToken == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B;
         //require(token.transferFrom(msg.sender, address(this), amount), "Transfer failed");
         address from = LibConstants.getMarketplaceExchangeAddress();
-        SafeERC20.safeTransferFrom(IERC20(token), from, msg.sender, amount);
+        SafeERC20.safeTransferFrom(IERC20(token), msg.sender, from, amount);
     }
 
     function _saveOrder(LibMarketPlaceStorage.TokenType sellToken, uint256 amount, uint256 amountAsk) private returns (uint256) {
@@ -205,7 +207,9 @@ library LibMarketPlace {
         IERC20 token = order.sellToken == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B;
 
         // Transfer tokens back to the seller
-        require(token.transfer(msg.sender, order.amount), "Refund transfer failed");
+        //require(token.transfer(msg.sender, order.amount), "Refund transfer failed");
+        address from = LibConstants.getMarketplaceExchangeAddress();
+        require(token.transferFrom(from, msg.sender, order.amount), "Refund transfer failed");
 
         // Emit event
         emit OrderCancelled(orderId, msg.sender);

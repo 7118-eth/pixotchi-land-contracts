@@ -41,4 +41,6 @@ contract AccessControlFacet is AccessControl2 {
     function accessControlBatchSetWhitelistAddresses(address[] memory _addresses, bool _isWhitelisted) external isAdmin {
         LibAccessControl2.batchSetWhitelistAddresses(_addresses, _isWhitelisted);
     }
+
+    //functio
 }
