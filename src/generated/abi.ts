@@ -976,6 +976,19 @@ export const abi = [
   },
   {
     "type": "function",
+    "name": "mintControl",
+    "inputs": [
+      {
+        "name": "enabled",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "name",
     "inputs": [],
     "outputs": [
