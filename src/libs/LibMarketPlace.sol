@@ -144,11 +144,13 @@ library LibMarketPlace {
             ? LibMarketPlaceStorage.TokenType.B
             : LibMarketPlaceStorage.TokenType.A;
 
-        IERC20 buyToken = buyTokenType == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B;
-        IERC20 sellToken = sellTokenType == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B;
+        IERC20 buyToken = buyTokenType == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B; //leaf
+        IERC20 sellToken = sellTokenType == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B; //seed
+        //IERC20 buyToken =  sellTokenType == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B; //seed
+        //IERC20 sellToken = buyTokenType == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B; //leaf
 
-        uint256 amount = order.amount;
-        uint amountAsk = order.amountAsk;
+        uint256 amount = order.amount; //seed
+        uint amountAsk = order.amountAsk; //leaf
 
 
         require(
@@ -171,7 +173,7 @@ library LibMarketPlace {
             buyToken.transferFrom(
                 msg.sender,
                 order.seller,
-                amount
+                amountAsk
             ),
             "Transfer failed"
         );
@@ -180,7 +182,7 @@ library LibMarketPlace {
 
         // Transfer sellToken from contract to buyer
         require(
-            sellToken.transferFrom(from, msg.sender, amountAsk),
+            sellToken.transferFrom(from, msg.sender, amount),
             "Transfer failed"
         );
 
