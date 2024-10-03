@@ -7,6 +7,7 @@ import {NFTModifiers} from "../libs/LibNFT.sol";
 import {LibLand} from "../libs/LibLand.sol";
 import "../shared/Structs.sol";
 import {AccessControl2, LibAccessControl2} from "../libs/libAccessControl2.sol";
+import {LibMintControlStorage} from "../libs/LibMintControlStorage.sol";
 
 contract AccessControlFacet is AccessControl2 {
 
@@ -42,5 +43,14 @@ contract AccessControlFacet is AccessControl2 {
         LibAccessControl2.batchSetWhitelistAddresses(_addresses, _isWhitelisted);
     }
 
-    //functio
+
+
+    function _sMC() internal pure returns (LibMintControlStorage.Data storage data) {
+        data = LibMintControlStorage.data();
+    }
+
+
+    function mintControl(bool enabled) external isAdmin {
+        _sMC().mintActive = enabled;
+    }
 }
