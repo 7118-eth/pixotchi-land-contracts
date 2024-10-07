@@ -70,7 +70,7 @@
     if (useEtherscan) {
       console.log('Verifying on Etherscan...');
       try {
-        await $`forge verify-contract ${onChain.address} ${name} --constructor-args ${args} --chain-id ${deploymentInfo[target].chainId} --verifier etherscan --etherscan-api-key ${etherscanApiKey} --watch`;
+        await $`forge verify-contract ${onChain.address} ${name} --constructor-args ${args} --chain-id ${deploymentInfo[target].chainId} --verifier etherscan --etherscan-api-key ${etherscanApiKey} --watch --delay 3 --retries 15`;
         console.log('Etherscan verification successful!');
       } catch (error) {
         console.error('Etherscan verification failed:', error);
@@ -80,7 +80,7 @@
     if (useBlockscout) {
       console.log('Verifying on Blockscout...');
       try {
-        await $`forge verify-contract ${onChain.address} ${name} --constructor-args ${args} --chain-id ${deploymentInfo[target].chainId} --verifier blockscout --verifier-url ${blockscoutApiUrl}/api/ --watch`;
+        await $`forge verify-contract ${onChain.address} ${name} --constructor-args ${args} --chain-id ${deploymentInfo[target].chainId} --verifier blockscout --verifier-url ${blockscoutApiUrl}/api/ --watch --delay 3 --retries 15`;
         console.log('Blockscout verification successful!');
       } catch (error) {
         console.error('Blockscout verification failed:', error);
