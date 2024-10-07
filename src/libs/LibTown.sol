@@ -44,7 +44,8 @@ library LibTown {
             isUpgrading: isUpgrading,
             levelUpgradeCostLeaf: isUpgrading ? levelData.levelUpgradeCostLeaf : levelDataNext.levelUpgradeCostLeaf,
             levelUpgradeCostSeedInstant: isUpgrading ? levelData.levelUpgradeCostSeedInstant : levelDataNext.levelUpgradeCostSeedInstant,
-            levelUpgradeBlockInterval: isUpgrading ? levelData.levelUpgradeBlockInterval : levelDataNext.levelUpgradeBlockInterval
+            levelUpgradeBlockInterval: isUpgrading ? levelData.levelUpgradeBlockInterval : levelDataNext.levelUpgradeBlockInterval,
+            levelUpgradeCostSeed: isUpgrading ? levelData.levelUpgradeCostSeed : levelDataNext.levelUpgradeCostSeed
         });
     }
 
@@ -169,5 +170,47 @@ library LibTown {
         level = s.townBuildings[landId][uint8(buildingId)].level;
         
         return level;
+    }
+
+    function _upgradeWithSeed(uint256 landId, uint8 buildingId) internal  returns(uint256 upgradeCost, uint256 xp) {
+        LibTownStorage.Data storage s = LibTownStorage.data();
+
+        // Check if the building type is enabled
+        require(s.townBuildingTypes[buildingId].enabled, "Building type is not enabled");
+
+        // Check if the building is not currently upgrading
+        require(!_townIsUpgrading(landId, buildingId), "Building is already upgrading");
+
+        uint8 currentLevel = s.townBuildings[landId][buildingId].level;
+        uint8 nextLevel = currentLevel + 1;
+
+        // Check if the building can be upgraded
+        require(nextLevel <= s.townBuildingTypes[buildingId].maxLevel, "Building already at max level");
+
+        upgradeCost = s.townBuildingTypes[buildingId].levelData[nextLevel].levelUpgradeCostSeed;
+        uint256 upgradeBlockInterval = s.townBuildingTypes[buildingId].levelData[nextLevel].levelUpgradeBlockInterval;
+
+        // Calculate XP
+        xp = LibXP.calculateLeafUpgradeXP(nextLevel);
+
+        // Add XP to the land
+        // LibXP._pushExperiencePoints(landId, xp);
+
+        // Check if the user has enough leaves
+        // require(_sA().resources[msg.sender].leaves >= upgradeCost, "Not enough leaves");
+
+        // TODO: Implement safe transfer of leaves
+        // _safeTransferLeaves(msg.sender, address(this), upgradeCost);
+
+        // Set upgrade details
+        uint256 upgradeCompletionBlock = block.number + upgradeBlockInterval;
+        s.townBuildings[landId][buildingId].blockHeightUpgradeInitiated = block.number;
+        s.townBuildings[landId][buildingId].blockHeightUntilUpgradeDone = upgradeCompletionBlock;
+        s.townBuildings[landId][buildingId].level = nextLevel;
+
+        // TODO: Emit an event for the upgrade initiation
+        // emit TownUpgradeInitiated(landId, buildingId, nextLevel, block.number, upgradeCompletionBlock);
+
+        return (upgradeCost, xp);
     }
 }

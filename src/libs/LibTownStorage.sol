@@ -115,8 +115,8 @@ library LibTownStorage {
         uint256 levelUpgradeCostSeedInstant;
         /// @notice Block interval required for upgrading to this level
         uint256 levelUpgradeBlockInterval;
-        /// @notice Number of quests available per day for this level
-        //uint256 questsPerDay;
+        /// @notice Seed cost for upgrading to this level
+        uint256 levelUpgradeCostSeed;
     }
 
     function _initBuildingTypes(Data storage s) internal {
@@ -135,7 +135,8 @@ library LibTownStorage {
         buildingType.levelData[1] = LevelData({
             levelUpgradeCostLeaf: 400_000 ether,
             levelUpgradeCostSeedInstant: 230 ether,
-            levelUpgradeBlockInterval: 24 hours / BLOCK_TIME
+            levelUpgradeBlockInterval: 24 hours / BLOCK_TIME,
+        levelUpgradeCostSeed: 200 ether
         });
     }
 
@@ -143,19 +144,22 @@ library LibTownStorage {
         buildingType.levelData[1] = LevelData({
             levelUpgradeCostLeaf: 550_000 ether,
             levelUpgradeCostSeedInstant: 250 ether,
-            levelUpgradeBlockInterval: 24 hours / BLOCK_TIME
+            levelUpgradeBlockInterval: 24 hours / BLOCK_TIME,
+        levelUpgradeCostSeed: 0
         });
 
         buildingType.levelData[2] = LevelData({
             levelUpgradeCostLeaf: 12_000_000 ether,
             levelUpgradeCostSeedInstant: 625 ether,
-            levelUpgradeBlockInterval: 50 hours / BLOCK_TIME
+            levelUpgradeBlockInterval: 50 hours / BLOCK_TIME,
+            levelUpgradeCostSeed: 0
         });
 
         buildingType.levelData[3] = LevelData({
             levelUpgradeCostLeaf: 18_000_000 ether,
             levelUpgradeCostSeedInstant: 1_450 ether,
-            levelUpgradeBlockInterval: 90 hours / BLOCK_TIME
+            levelUpgradeBlockInterval: 90 hours / BLOCK_TIME,
+            levelUpgradeCostSeed: 0
         });
     }
 }

@@ -10,6 +10,7 @@ import {LibTown} from "../libs/LibTown.sol";
 import {LibPayment} from "../libs/LibPayment.sol";
 import {LibXP} from "../libs/LibXP.sol";
 import {AccessControl2} from "../libs/libAccessControl2.sol";
+import {LibTownStorage} from  "../libs/LibTownStorage.sol";
 
 
 contract TownFacet is AccessControl2 {
@@ -78,6 +79,7 @@ contract TownFacet is AccessControl2 {
 
     event TownUpgradedWithLeaf(uint256 indexed landId, uint8 indexed buildingId, uint256 upgradeCost, uint256 xp);
     event TownSpeedUpWithSeed(uint256 indexed landId, uint8 indexed buildingId, uint256 speedUpCost, uint256 xp);
+    event TownUpgradedWithSeed(uint256 indexed landId, uint8 indexed buildingId, uint256 upgradeCost, uint256 xp);
 
     function townUpgradeWithLeaf(uint256 landId, uint8 buildingId) public isApproved(landId) {
         (uint256 upgradeCost, uint256 xp) = LibTown._upgradeWithLeaf(landId, buildingId);
@@ -91,6 +93,14 @@ contract TownFacet is AccessControl2 {
         LibXP.pushExperiencePoints(landId, xp);
         LibPayment.paymentPayWithSeed(msg.sender, speedUpCost);
         emit TownSpeedUpWithSeed(landId, buildingId, speedUpCost, xp);
+    }
+
+    function townBuildMarketPlace(uint256 landId) external isApproved(landId) {
+        uint8 buildingId = uint8(LibTownStorage.TownBuildingNaming.MARKET_PLACE);
+        (uint256 upgradeCost, uint256 xp) = LibTown._upgradeWithSeed(landId, buildingId);
+        LibXP.pushExperiencePoints(landId, xp);
+        LibPayment.paymentPayWithSeed(msg.sender, upgradeCost);
+        emit TownUpgradedWithSeed(landId, buildingId, upgradeCost, xp);
     }
     
 //    function claimTownProduction(uint256 landId, uint8 buildingId) public exists(landId) {

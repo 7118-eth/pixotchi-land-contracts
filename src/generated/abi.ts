@@ -1323,6 +1323,19 @@ export const abi = [
   },
   {
     "type": "function",
+    "name": "townBuildMarketPlace",
+    "inputs": [
+      {
+        "name": "landId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "townGetBuildingsByLandId",
     "inputs": [
       {
@@ -1379,6 +1392,11 @@ export const abi = [
           },
           {
             "name": "levelUpgradeBlockInterval",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "levelUpgradeCostSeed",
             "type": "uint256",
             "internalType": "uint256"
           }
@@ -2289,6 +2307,37 @@ export const abi = [
   {
     "type": "event",
     "name": "TownUpgradedWithLeaf",
+    "inputs": [
+      {
+        "name": "landId",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      },
+      {
+        "name": "buildingId",
+        "type": "uint8",
+        "indexed": true,
+        "internalType": "uint8"
+      },
+      {
+        "name": "upgradeCost",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "xp",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "TownUpgradedWithSeed",
     "inputs": [
       {
         "name": "landId",
