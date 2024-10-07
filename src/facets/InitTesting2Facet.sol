@@ -44,30 +44,30 @@ contract InitTesting2Facet is AccessControl2 {
         LibVillageStorage._initBuildingTypes(villageStorage);
     }
 
- function questStorageUpdate() isAdmin() external   {
-
-        _sQ().questDifficulties[QuestDifficultyLevel.EASY] = QuestDifficulty({
-            difficulty: QuestDifficultyLevel.EASY,
-            durationInBlocks: LibConstants.minutesToBlocks(1),//LibConstants.hoursToBlocks(3),
-            cooldownInBlocks: LibConstants.minutesToBlocks(2), //LibConstants.hoursToBlocks(12),
-            rewardMultiplier: 1
-        });
-        _sQ().questDifficulties[QuestDifficultyLevel.MEDIUM] = QuestDifficulty({
-            difficulty: QuestDifficultyLevel.MEDIUM,
-            durationInBlocks: LibConstants.minutesToBlocks(2),//LibConstants.hoursToBlocks(6),
-            cooldownInBlocks: LibConstants.minutesToBlocks(3), //LibConstants.hoursToBlocks(18),
-            rewardMultiplier: 2
-        });
-
-        _sQ().questDifficulties[QuestDifficultyLevel.HARD] = QuestDifficulty({
-            difficulty: QuestDifficultyLevel.HARD,
-            durationInBlocks: LibConstants.minutesToBlocks(3),//LibConstants.hoursToBlocks(12),
-            cooldownInBlocks: LibConstants.minutesToBlocks(4),//LibConstants.hoursToBlocks(24),
-            rewardMultiplier: 3
-        });
-
-
- }
+// function questStorageUpdate() isAdmin() external   {
+//
+//        _sQ().questDifficulties[QuestDifficultyLevel.EASY] = QuestDifficulty({
+//            difficulty: QuestDifficultyLevel.EASY,
+//            durationInBlocks: LibConstants.minutesToBlocks(1),//LibConstants.hoursToBlocks(3),
+//            cooldownInBlocks: LibConstants.minutesToBlocks(2), //LibConstants.hoursToBlocks(12),
+//            rewardMultiplier: 1
+//        });
+//        _sQ().questDifficulties[QuestDifficultyLevel.MEDIUM] = QuestDifficulty({
+//            difficulty: QuestDifficultyLevel.MEDIUM,
+//            durationInBlocks: LibConstants.minutesToBlocks(2),//LibConstants.hoursToBlocks(6),
+//            cooldownInBlocks: LibConstants.minutesToBlocks(3), //LibConstants.hoursToBlocks(18),
+//            rewardMultiplier: 2
+//        });
+//
+//        _sQ().questDifficulties[QuestDifficultyLevel.HARD] = QuestDifficulty({
+//            difficulty: QuestDifficultyLevel.HARD,
+//            durationInBlocks: LibConstants.minutesToBlocks(3),//LibConstants.hoursToBlocks(12),
+//            cooldownInBlocks: LibConstants.minutesToBlocks(4),//LibConstants.hoursToBlocks(24),
+//            rewardMultiplier: 3
+//        });
+//
+//
+// }
 
 
 
