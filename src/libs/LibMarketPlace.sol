@@ -166,24 +166,42 @@ library LibMarketPlace {
         // Mark order as inactive
         order.isActive = false;
 
+        address exchangeAddress = LibConstants.getMarketplaceExchangeAddress();
 
 
-        // Transfer buyToken from buyer to seller
+//        // Transfer buyToken from buyer to seller
+//        require(
+//            buyToken.transferFrom(
+//                msg.sender,
+//                order.seller,
+//                amountAsk
+//            ),
+//            "Transfer failed"
+//        );
+        // Transfer buyToken from buyer to exchangeAddress
         require(
             buyToken.transferFrom(
                 msg.sender,
+                exchangeAddress,
+                amountAsk
+            ),
+            "TX buyToken from buyer to exchangeAddress failed"
+        );
+        // Transfer buyToken from exchangeAddress to seller
+        require(
+            buyToken.transferFrom(
+                exchangeAddress,
                 order.seller,
                 amountAsk
             ),
-            "Transfer failed"
+            "TX buyToken from exchangeAddress to seller failed"
         );
 
-        address from = LibConstants.getMarketplaceExchangeAddress();
 
         // Transfer sellToken from contract to buyer
         require(
-            sellToken.transferFrom(from, msg.sender, amount),
-            "Transfer failed"
+            sellToken.transferFrom(exchangeAddress, msg.sender, amount),
+            "TX sellToken from contract to buyer failed"
         );
 
 
