@@ -49,6 +49,7 @@ library LibMarketPlaceStorage {
         uint256 amount;
         bool isActive;
         uint256 amountAsk;
+        uint256 sellerLandId;
         //address buyer;
         //uint256 timestamp;
     }

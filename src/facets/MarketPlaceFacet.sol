@@ -6,6 +6,7 @@ import {NFTModifiers} from "../libs/LibNFT.sol";
 import {LibMarketPlace} from "../libs/LibMarketPlace.sol";
 import {LibMarketPlaceStorage} from "../libs/LibMarketPlaceStorage.sol";
 import {AccessControl2} from "../libs/libAccessControl2.sol";
+import {LibXP} from "../libs/LibXP.sol";
 
 contract MarketPlaceFacet is AccessControl2 {
 
@@ -40,7 +41,9 @@ contract MarketPlaceFacet is AccessControl2 {
 
     // Take order
     function marketPlaceTakeOrder(uint256 landId, uint256 orderId) isApproved(landId) external {
-        LibMarketPlace.takeOrder(landId, orderId);
+        (uint256 xpSeller, uint256 xpBuyer, uint256 landIdSeller) = LibMarketPlace.takeOrder(landId, orderId);
+        LibXP.pushExperiencePoints(landId, xpBuyer);
+        LibXP.pushExperiencePoints(landIdSeller, xpSeller);
     }
 
     // Cancel order

@@ -53,7 +53,7 @@ library LibMarketPlace {
         require(token.allowance(msg.sender, address(this)) >= amount, "Insufficient allowance");
         _;
     }
-    modifier sufficientAmount(LibMarketPlaceStorage.TokenType tokenType, uint256 amount) {
+    modifier sufficientAmount(/*LibMarketPlaceStorage.TokenType tokenType, */uint256 amount) {
         //IERC20 token = tokenType == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B;
         require(amount >= 0, "Insufficient amount");
         _;
@@ -90,11 +90,14 @@ library LibMarketPlace {
     ) internal
     sufficientBalance(sellToken, amount)
     sufficientAllowance(sellToken, amount)
-    sufficientAmount(sellToken, amount)
+    //sufficientAmount(/*sellToken, */amount)
     marketPlaceExists(landId)
     isActive
     {
-        uint256 orderId = _saveOrder(sellToken, amount, amountAsk);
+        require(amount >= 0, "Insufficient amount");
+        require(amountAsk >= 0, "Insufficient amount");
+
+        uint256 orderId = _saveOrder(sellToken, amount, amountAsk, landId);
         _transferTokensToContract(sellToken, amount);
 
         emit OrderCreated(
@@ -113,14 +116,15 @@ library LibMarketPlace {
         SafeERC20.safeTransferFrom(IERC20(token), msg.sender, from, amount);
     }
 
-    function _saveOrder(LibMarketPlaceStorage.TokenType sellToken, uint256 amount, uint256 amountAsk) private returns (uint256) {
+    function _saveOrder(LibMarketPlaceStorage.TokenType sellToken, uint256 amount, uint256 amountAsk, uint256 landId) private returns (uint256) {
         uint256 orderId = _sM().nextOrderId;
         _sM().orders[orderId] = LibMarketPlaceStorage.Order({
             seller: msg.sender,
             sellToken: sellToken,
             amount: amount,
             amountAsk: amountAsk,
-            isActive: true
+            isActive: true,
+            sellerLandId: landId
         });
 
         _sM().nextOrderId += 1;
@@ -130,27 +134,34 @@ library LibMarketPlace {
     }
 
     // Take order
-    function takeOrder(uint256 landId, uint256 orderId) internal
+    function takeOrder(uint256 landId, uint256 orderId)
+    internal
     orderExists(orderId)
     orderActive(orderId)
     marketPlaceExists(landId)
     //TODO: add check for amountAsk
     isActive
+    returns (uint256 xpSeller, uint256 xpBuyer, uint256 landIdSeller)
     {
+
         LibMarketPlaceStorage.Order storage order = _sM().orders[orderId];
+
+        require(msg.sender != order.seller, "msg.sender cant be same as order.seller");
+
+
         LibMarketPlaceStorage.TokenType sellTokenType = order.sellToken;
         LibMarketPlaceStorage.TokenType buyTokenType = sellTokenType ==
         LibMarketPlaceStorage.TokenType.A
             ? LibMarketPlaceStorage.TokenType.B
             : LibMarketPlaceStorage.TokenType.A;
 
-        IERC20 buyToken = buyTokenType == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B; //leaf
-        IERC20 sellToken = sellTokenType == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B; //seed
-        //IERC20 buyToken =  sellTokenType == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B; //seed
-        //IERC20 sellToken = buyTokenType == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B; //leaf
+        IERC20 buyToken = buyTokenType == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B;
+        IERC20 sellToken = sellTokenType == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B;
+        //IERC20 buyToken =  sellTokenType == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B;
+        //IERC20 sellToken = buyTokenType == LibMarketPlaceStorage.TokenType.A ? TOKEN_A : TOKEN_B;
 
-        uint256 amount = order.amount; //seed
-        uint amountAsk = order.amountAsk; //leaf
+        uint256 amount = order.amount;
+        uint amountAsk = order.amountAsk;
 
 
         require(
@@ -165,6 +176,10 @@ library LibMarketPlace {
 
         // Mark order as inactive
         order.isActive = false;
+
+        xpSeller = 1 ether; //TODO calculate dynamic
+        xpBuyer = 1 ether; //TODO calculate dynamic
+        landIdSeller = order.sellerLandId;
 
         address exchangeAddress = LibConstants.getMarketplaceExchangeAddress();
 
@@ -208,6 +223,10 @@ library LibMarketPlace {
 
         // Emit event
         emit OrderTaken(orderId, msg.sender);
+
+
+
+        return (xpSeller, xpBuyer, landIdSeller);
     }
 
     // Cancel order
