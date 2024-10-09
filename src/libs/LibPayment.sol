@@ -4,6 +4,8 @@ pragma solidity >=0.8.21;
 import "../shared/Structs.sol";
 import { SafeERC20 } from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {IERC20Burnable} from "../interfaces/IERC20Burnable.sol";
+
 import "./LibConstants.sol";
 
 /// @title LibPayment
@@ -50,7 +52,13 @@ library LibPayment {
         // No state variables to update in this case
 
         // Interactions
-        SafeERC20.safeTransferFrom(IERC20(tokenAddress), from, receiveAddress, amount);
+        if(receiveAddress == address(0)) {
+            IERC20Burnable(tokenAddress).burnFrom(from, amount);
+            //SafeERC20.safeTransferFrom(IERC20(tokenAddress), from, address(this), amount);
+            //IERC20Burnable(tokenAddress).burn(amount);
+        } else {
+            SafeERC20.safeTransferFrom(IERC20(tokenAddress), from, receiveAddress, amount);
+        }
     }
 
     /// @notice Rewards with Leaf token
