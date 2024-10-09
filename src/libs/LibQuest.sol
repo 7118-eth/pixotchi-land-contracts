@@ -13,7 +13,7 @@ library LibQuest {
 
     // Reward ranges
     uint256 internal constant MIN_SEED_REWARD = 1 ether;
-    uint256 internal constant MAX_SEED_REWARD = 50 ether; //100 initial
+    uint256 internal constant MAX_SEED_REWARD = 10 ether; //50 ether; //100 initial
 
     uint256 internal constant MIN_LEAF_REWARD = 1 ether;// * 3285; //3285 = 69 billion / 21 million
     uint256 internal constant MAX_LEAF_REWARD = 50 ether * 3285; //3285 = 69 billion / 21 million // 100 initial
